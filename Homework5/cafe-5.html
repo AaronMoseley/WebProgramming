@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, shrink-to-fit=no">
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+		<title>
+			Munshn Lunshn
+		</title>
+
+		<style>
+			@font-face {font-family: AntiqueHeritage; src: url('http://cs.uky.edu/~ajmo276/Homework4/AntiqueHeritage.otf')}
+
+			h2 {font-family:AntiqueHeritage; margin-top:30px; margin-bottom:30px;}			
+
+			.highlighted {background-color:yellow;}
+                        .normalText {font-weight:normal;}
+                        .tableElement {text-align:center; font-family:Times New Roman;}
+                        .green {color:green;}
+                        .red {color:red;}
+                        .bold {font-weight:bold; font-family:Arial;}
+			.centered {text-align:center;}
+
+			#BackgroundImage {width: 100%; height: 100%; position:fixed; z-index: -1;}
+			#MainMenu {margin-top: 33px;}
+			#MenuHead {text-align: center;}
+                        #inedible {border: 2px solid green;}
+			#poisonous {border-top: 2px solid red; border-bottom: 2px solid red; border-left: 2px solid blue; border-right: 2px solid blue;}
+		</style>
+	</head>
+
+	<body>
+	<div id="BackgroundImage">
+	<img src="http://cs.uky.edu/~ajmo276/Homework4/WebsiteBackground.jpg" width="100%" height="100%">
+	</div>
+	<div class="container-fluid">
+		<div class="centered">
+		<div class = "row">
+		
+		<div class="offset-xl-2 col-xl-1 col-lg-12">
+			<canvas id="myCanvas" width="200" height="200"></canvas>	
+		</div>
+
+		<div class="col-xl-6 col-lg-12">
+		<h1>
+			Welcome to the High Times Munshn Lunshn &#x2122; !
+		</h1>
+		</div>
+
+		</div>
+
+		</br>
+
+		<h4 class="normalText">
+		All our clients are served right!<br>
+
+		<!-- Clicking this span calls an easter egg function -->
+		<span class="highlighted" onclick='easterEgg(this)'>This website is under construction, as is our cafe.</span>
+		</h4>
+
+		</br>
+
+		<h2>	
+			See the menu
+		</h2>
+
+		<h3>
+			Click on a word for details
+		</h3>
+		</div>
+
+		<div class="row">
+
+		</br>
+		<div class="col-lg-7" id="MainMenu">
+		<table class="table table-striped table-bordered">
+			<h1 id="MenuHead">Menu Categories</h1>
+			</br>
+			</br>
+
+			<tr>
+				<td class="tableElement" onmouseenter='greenAndWhite(this)' onmouseleave='removeBackgdAndColor(this)' onclick='setTable("snacks")'>
+					<p>snacks</p>
+				</td>
+		
+				<td class="tableElement">
+					&#x1F34E;
+				</td>
+
+				<td class="tableElement" onmouseenter='greenAndWhite(this)' onmouseleave='removeBackgdAndColor(this)' onclick='setTable("drinks")'>
+					<p>drinks</p>
+				</td>
+
+				<td class="tableElement">
+					&#x1F378;
+				</td>
+
+				<td class="tableElement" onmouseenter='greenAndWhite(this)' onmouseleave='removeBackgdAndColor(this)' onclick='setTable("mains")'>
+					<p>mains</p>
+				</td>
+
+				<td class="tableElement">
+					&#x1F357;
+				</td>
+			</tr>
+
+			<tr>
+				<td class="tableElement" onmouseenter='greenAndWhite(this)' onmouseleave='removeBackgdAndColor(this)' onclick='setTable("desserts")'>
+					<p>desserts</p>
+				</td>
+
+				<td class="tableElement">
+					&#x1F382;
+				</td>
+
+				<td class="tableElement" onmouseenter='greenAndWhite(this)' onmouseleave='removeBackgdAndColor(this)' onclick='setTable("for kids")'>
+					<p>for kids</p>
+				</td>
+
+				<td class="tableElement">
+					&#x1F37C;
+				</td>
+
+				<td class="tableElement" onmouseenter='greenAndWhite(this)' onmouseleave='removeBackgdAndColor(this)' onclick='setTable("for pets")'>
+					<p>
+						<span data-bs-toggle="tooltip" data-bs-placement="bottom" title="Sorry: No Items">
+						for pets
+						</span>
+					</p>
+				</td>
+
+				<td class="tableElement">
+					&#x1F415;
+				</td>
+			</tr>
+
+			<tr>
+				<td class="tableElement" onmouseenter='greenAndWhite(this)' onmouseleave='removeBackgdAndColor(this)' onclick='setTable("takeout")'>
+					<p>takeout</p>
+				</td>
+
+				<td class="tableElement">
+					&#x1F355;
+				</td>
+
+				<td id="inedible" class="tableElement" onmouseenter='greenAndWhite(this)' onmouseleave='removeBackgdAndColor(this)' onclick='setTable("inedible")'>
+					<p>inedible</p>
+				</td>
+
+				<td class="tableElement">
+					&#x1F388;
+				</td>
+
+				<td id="poisonous" class="tableElement" onmouseenter='greenAndWhite(this)' onmouseleave='removeBackgdAndColor(this)' onclick='setTable("poisonous")'>
+					<p>poisonous</p>
+				</td>
+
+				<td class="tableElement">
+					&#x2620;
+				</td>
+			</tr>
+		</table>
+		</div>
+
+		<div class="col-lg-5">
+		<h2 id="menuLabel">
+		</h2>
+
+		<p class="red" id="numAccessed">
+		</p>
+
+		<table class="table table-striped table-bordered table-hover table-dark" id = "menu">
+		</table>
+		</div>
+
+		</div>
+
+		</br>
+
+		<button type="button" id="tipButton" class="btn btn-success">Compute Tip</button>
+
+		</br>
+		</br>
+
+		<input type="hidden" id="tipInput" oninput="calculateTip()">
+		</input>
+
+
+		<p id="tipCalculations" class="bold">
+		</p>
+
+		<h2>
+			We are hiring!
+		</h2>
+
+		<h4 class="normalText">
+			We are looking for employees who are
+		</h4>
+
+		<ol>
+			<li>
+				Reliable
+			</li>
+
+			<li>
+				Prompt
+			</li>
+
+			<li>
+				Friendly
+
+				<ul>
+					<li>
+						Able to deal with <i>obnoxious customers</i>
+					</li>
+
+					<li>
+						Able to deal with <i>critical managers</i>
+					</li>
+
+					<li>
+						Able to cater to <i>the chef's whims</i>
+					</li>
+				</ul>
+			</li>
+
+			<li>
+				<span class="green">Multi</span><span class="red">lingual</span>
+			</li>
+
+			<li class="bold">
+				Healthy
+			</li>
+		</ol>
+	</div>
+	</body>
+
+	<script
+	src="https://code.jquery.com/jquery-3.5.1.min.js"
+	integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+	crossorigin="anonymous"></script>
+
+	<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+	integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+	crossorigin="anonymous"></script>
+	
+	<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+	integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+	crossorigin="anonymous"></script>
+
+	<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jcanvas/21.0.1/jcanvas.js"
+	crossorigin="anonymous"></script>
+
+		<script>
+		const dbName = 'myDB';
+		const serial = 17207;
+		var myDB;
+		var created = false;
+
+		const entries = [
+
+		{"item": "olive hash", "description": "mashed olives in gravy", "category": "snacks", "price": "$2.50", "accesses": 0},
+		{"item": "smarties", "description": "small savory bites", "category": "snacks", "price": "$1.00", "accesses": 0},
+		{"item": "clumpers", "description": "chocolate-covered raisins", "category": "snacks", "price": "$1.50", "accesses": 0},
+
+		{"item": "smoothie", "description": "peach and frog flavored", "category": "drinks", "price": "$5.54", accesses: 0},
+		{"item": "milk", "description": "fresh from our cow", "category": "drinks", "price": "$2.50", accesses: 0},
+		{"item": "water", "description": "guaranteed mostly pure", "category": "drinks", "price": "$0.50", accesses: 0},
+
+		{"item": "steak", "description": "primal rib", "category": "mains", "price": "$20.50", accesses: 0},
+		{"item": "fish", "description": "whatever we found at the market", "category": "mains", "price": "$25.00", accesses: 0},
+		{"item": "mac-n-cheese", "description": "always a winner!", "category": "mains", "price": "$15.00", accesses: 0},
+
+		{"item": "ice cream", "description": "durian or avocado", "category": "desserts", "price": "$5.00", accesses: 0},
+		{"item": "shaved ice", "description": "durian or avocado", "category": "desserts", "price": "$3.20", accesses: 0},
+		{"item": "cake", "description": "dark forest", "category": "desserts", "price": "$4.00", accesses: 0},
+
+		{"item": "small mac-n-cheese", "description": "always a winner", "category": "for kids", "price": "$5.00", accesses: 0},
+		{"item": "small fry", "description": "most likely some fish", "category": "for kids", "price": "$5.00", accesses: 0},
+
+		{"item": "empty box", "description": "recyclable", "category": "takeout", "price": "$0.30", accesses: 0},
+		{"item": "pizza slice", "description": "vegan, white", "category": "takeout", "price": "$1.00", accesses: 0},
+		{"item": "ice cream cone", "description": "durian or avocado", "category": "takeout", "price": "$5.00", accesses: 0},
+
+		{"item": "beer stein", "description": "glass", "category": "inedible", "price": "$3.00", accesses: 0},
+		{"item": "can holder", "description": "rubber", "category": "inedible", "price": "$2.00", accesses: 0},
+		{"item": "napkins", "description": "50, recycled", "category": "inedible", "price": "$1.00", accesses: 0},
+
+		{"item": "table cleaner", "description": "bottled", "category": "poisonous", "price": "$10.50", accesses: 0},
+
+		];
+
+		initDB('menu');
+
+		displayLogo();
+
+		function initDB(relation)
+		{
+			const request = window.indexedDB.open(dbName, serial);
+			request.onerror = function(event) {
+				alert('Error loading database: ' + request.error.message);
+			};
+
+			request.onsuccess = function(event) {
+				console.log("Success loading database.");
+				myDB = event.target.result;
+
+				let objectStore = myDB.transaction(["menu"], "readonly").objectStore("menu");
+
+				let count = objectStore.count();
+				count.onsuccess = function()
+				{
+					if(count.result == 0 && !created)
+					{
+						myDB.close();
+						myDB = null;
+
+						window.indexedDB.deleteDatabase(dbName);
+						initDB("menu");
+						return;
+					}
+				};
+
+				count.onerror = function()
+				{
+					console.log("Error Loading Database");
+				};
+
+				myDB.onerror = function(event) {
+					alert("Error: " + event.target.error.message);
+				};
+			};
+
+			request.onupgradeneeded = function(event)
+			{
+				console.log("Creating database");
+				myDB = this.result;
+				myDB.onerror = function(event) {
+					alert("Error: " + event.target.error.message);
+				};
+				
+				const table = myDB.createObjectStore(relation, { keyPath: "item" });
+				table.createIndex("category", "category", {unique: false});
+				table.createIndex("accesses", "accesses", {unique: false});
+				table.createIndex("description", "description", {unique: false});
+				table.createIndex("price", "price", {unique: false});
+
+				created = true;
+
+				return("Initialized");
+			};
+		};
+
+		function addEntries(db)
+		{
+			let table1 = db.transaction(["menu"], "readwrite").objectStore("menu");
+			entries.forEach(function(elt) {
+				const request = table1.add(elt);
+				request.onsuccess = function() {
+					console.log("Successfully added entry");
+				};
+			});
+		}
+
+		function setTable(category)
+		{
+			if(created)
+			{
+				addEntries(myDB);
+				created = false;
+			}
+
+			const tableHTML = document.querySelector("#menu");
+			const accessed = document.querySelector("#numAccessed");
+			const label = document.querySelector("#menuLabel");
+
+			if(category == "for pets")
+			{
+				tableHTML.innerHTML = "";
+				accessed.innerHTML = "";
+				label.innerHTML = "";
+				return;
+			}
+
+			label.innerText = "Details about " + category;
+
+			let htmlString = '<thead><tr style="font-weight: bold;"><th scope="col">Item</th><th scope="col">Description</th><th scope="col">Price</th></tr></thead>';
+
+			const transaction = myDB.transaction(["menu"], "readwrite");
+			const table = transaction.objectStore("menu");
+
+			let index;
+			try {
+				index = table.index("category");
+			} catch {
+				alert("Failed to get index for categories");
+			}
+
+			const range = IDBKeyRange.only(category);
+
+			index.openCursor(range).onsuccess = function(event)
+			{
+				var cursor = event.target.result;
+				if(cursor)
+				{
+					if(cursor.value["category"] == category)
+					{
+						let temp = cursor.value["accesses"] + 1;
+						cursor.value["accesses"] = cursor.value["accesses"] + 1;
+						const update = table.put(cursor.value);
+						update.onsuccess = function(event) {
+							console.log("Succeeded in modifying " + category + "'s accesses");
+						};
+
+						accessed.innerText = "You have accessed this information " + temp.toString() + " times.";
+
+						htmlString += "<tr> <td>" + cursor.value["item"] + "</td> <td>" + cursor.value["description"] + "</td> <td>" + cursor.value["price"] + "</td> </tr>";
+					}
+
+					cursor.continue();
+				}
+
+				tableHTML.innerHTML = htmlString;
+			};
+		};
+
+		document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function (elt) {
+			new bootstrap.Tooltip(elt);
+		});
+
+		function greenAndWhite(obj)
+		{
+			obj.style.color = 'white';
+			obj.style.backgroundColor = 'green';
+		}
+
+		function removeBackgdAndColor(obj)
+		{
+			obj.style.color = 'black';
+			obj.style.backgroundColor = 'transparent';
+		}
+
+		$('#tipButton').on('click', function(event) {
+			document.querySelector('#tipButton').disabled = "true";
+			document.querySelector('#tipInput').type = "number";
+		});
+
+		async function calculateTip()
+		{
+			if(Number(document.querySelector('#tipInput').value) != Number(document.querySelector('#tipInput').value).toFixed(2))
+			{
+				document.querySelector('#tipInput').value = Math.trunc(Number(document.querySelector('#tipInput').value) * 100) / 100;
+			}
+
+			if(Number(document.querySelector('#tipInput').value) < 0)
+			{
+				document.querySelector('#tipInput').value = 0;
+			}
+
+			let num = Number(document.querySelector('#tipInput').value);
+			let fifteen = num * 1.15;
+			let eighteen = num * 1.18;
+			let twenty = num * 1.2;
+			let twentyfive = num * 1.25;
+
+			let htmlString = "bill: $" + num.toFixed(2) + "</br>with 15% tip: $" + fifteen.toFixed(2) + "</br>with 18% tip: $" + eighteen.toFixed(2) + "</br>with 20% tip: $" + twenty.toFixed(2) + "</br>with 25% tip: $" + twentyfive.toFixed(2) + "</br>";
+
+			document.querySelector('#tipCalculations').innerHTML = htmlString;
+		}
+
+		function displayLogo()
+		{
+			$("canvas").drawEllipse({
+				layer: true,
+				x: 75, y: 100,
+				strokeStyle: 'black',
+				fillStyle: 'lightblue',
+				width: 75,
+				height: 150,
+				rotate: 40,
+				mouseover: function(layer) {
+					$(this).animateLayer(layer, {
+						rotate: '+=360',
+					}, 500);
+				},
+			}).drawRect({
+				layer: true,
+				x: 75, y: 175,
+				fillStyle: 'orange',
+				width: 150,
+				height: 50,
+				mouseover: function(layer) {
+					$(this).animateLayer(layer, {
+						fillStyle: 'lightblue',
+						strokeStyle: 'black',
+					}, 5000);
+				},
+			}).drawArc({
+				layer: true,
+				x: 100, y: 55,
+				fillStyle: 'orange',
+				start: 270,
+				end: 450,
+				radius: 50,
+				mouseover: function(layer) {
+					$(this).animateLayer(layer, {
+						start: 300,
+						end: 480,
+						x: 115,
+					}, 1000);
+				},
+			}).drawText({
+				layer: true,
+				text: "HTML",
+				fillStyle: 'black',
+				strokeStyle: 'orange',
+				x: 75, y: 100,
+				fontFamily: 'Arial',
+				fontSize: 48,
+			});
+		};
+
+		//This is the easter egg function
+		async function easterEgg(obj)
+		{
+			obj.style.backgroundColor = 'green';
+			obj.innerHTML = "This website is no longer under construction and can be used.";
+		}
+	</script>
+</html>
